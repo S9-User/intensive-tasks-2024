@@ -42,7 +42,6 @@ public class Task2 {
         int currentEntrance = ((flatNumber - 1) / (4 * floorAmount)) + 1;
         int currentFloor = ((flatNumber - 1) % (4 * floorAmount)) / 4 + 1;
 
-
         if ((4*floorAmount*entranceAmount<flatNumber)){
         output = "Такой квартиры не существует";
         }
@@ -64,8 +63,6 @@ public class Task2 {
         if (flatNumber%4 == 0&&(currentEntrance<=entranceAmount)){
             output = flatNumber + " кв - " +  currentEntrance + " подъезд, " + currentFloor + " этаж, справа от лифта, вправо" ;
         }
-
-
 
     return output;
     }
