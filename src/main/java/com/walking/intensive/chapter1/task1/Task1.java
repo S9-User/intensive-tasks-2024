@@ -23,27 +23,22 @@ public class Task1 {
     static String getAgeString(int age) {
 
         int remainder = age%10;
-        String output = "";
 
         if ((age < 0) || (age > 127)) {
-            output = "Некорректный ввод";
+            return "Некорректный ввод";
         }
 
-        if ((remainder == 0) || (age >= 5 && age <= 20) ||(age >= 105 && age <= 120) || (remainder >= 5 && remainder <= 9) ) {
-            output ="Вам " + age + " лет";
+        if ((remainder == 0) || (age >= 5 && age <= 20) ||(age >= 105 && age <= 120) || (remainder >= 5 ) ) {
+            return "Вам " + age + " лет";
         }
 
         if ((remainder == 1) & (age != 11) & (age != 111)) {
-            output ="Вам " + age + " год";
+            return "Вам " + age + " год";
         }
 
         if ( ((age > 20 && age < 105) || age<5 || age>120 )&&((remainder == 2) ^ (remainder == 3) ^ (remainder == 4))) {
-            output ="Вам " + age + " года";
+            return "Вам " + age + " года";
         }
-
-        return output;
-
-
 
 
     }
