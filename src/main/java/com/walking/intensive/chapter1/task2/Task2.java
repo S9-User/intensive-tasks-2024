@@ -33,7 +33,7 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(getFlatLocation(10,3,120));
+        System.out.println(getFlatLocation(10, 3, 120));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -41,29 +41,34 @@ public class Task2 {
 
         int currentEntrance = ((flatNumber - 1) / (4 * floorAmount)) + 1;
         int currentFloor = ((flatNumber - 1) % (4 * floorAmount)) / 4 + 1;
+        boolean isCurrEntrValid = currentEntrance <= entranceAmount;
 
-        if ((4*floorAmount*entranceAmount<flatNumber)){
-        output = "Такой квартиры не существует";
+        if ((4 * floorAmount * entranceAmount < flatNumber)) {
+            output = "Такой квартиры не существует";
         }
-        if (floorAmount<=0 || entranceAmount<=0 || flatNumber<=0){
-        output = "Некорректные входные данные";
+        if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
+            output = "Некорректные входные данные";
         }
-        if (flatNumber%4 == 1&&(currentEntrance<=entranceAmount)){
-            output = flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + " этаж, слева от лифта, влево" ;
-        }
-
-        if (flatNumber%4 == 2&&(currentEntrance<=entranceAmount)){
-            output = flatNumber + " кв - " +  currentEntrance + " подъезд, " + currentFloor + " этаж, слева от лифта, вправо" ;
+        if (flatNumber % 4 == 1 && isCurrEntrValid) {
+            output = flatNumber + " кв - " + currentEntrance + " подъезд, "
+                    + currentFloor + " этаж, слева от лифта, влево";
         }
 
-        if (flatNumber%4 == 3&&(currentEntrance<=entranceAmount)){
-            output = flatNumber + " кв - " +  currentEntrance + " подъезд, " + currentFloor + " этаж, справа от лифта, влево" ;
+        if (flatNumber % 4 == 2 && isCurrEntrValid) {
+            output = flatNumber + " кв - " + currentEntrance + " подъезд, "
+                    + currentFloor + " этаж, слева от лифта, вправо";
         }
 
-        if (flatNumber%4 == 0&&(currentEntrance<=entranceAmount)){
-            output = flatNumber + " кв - " +  currentEntrance + " подъезд, " + currentFloor + " этаж, справа от лифта, вправо" ;
+        if (flatNumber % 4 == 3 && isCurrEntrValid) {
+            output = flatNumber + " кв - " + currentEntrance + " подъезд, "
+                    + currentFloor + " этаж, справа от лифта, влево";
         }
 
-    return output;
+        if (flatNumber % 4 == 0 && isCurrEntrValid) {
+            output = flatNumber + " кв - " + currentEntrance + " подъезд, "
+                    + currentFloor + " этаж, справа от лифта, вправо";
+        }
+
+        return output;
     }
 }
