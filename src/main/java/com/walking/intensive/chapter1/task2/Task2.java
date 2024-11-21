@@ -33,7 +33,7 @@ package com.walking.intensive.chapter1.task2;
  */
 public class Task2 {
     public static void main(String[] args) {
-        System.out.println(getFlatLocation(2, 2, 0));
+        System.out.println(getFlatLocation(2, 2, 3));
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
@@ -48,29 +48,32 @@ public class Task2 {
 
         int currentEntrance = ((flatNumber - 1) / (4 * floorAmount)) + 1;
         int currentFloor = ((flatNumber - 1) % (4 * floorAmount)) / 4 + 1;
-        boolean isCurrEntrValid = currentEntrance <= entranceAmount;
 
-        if (isCurrEntrValid) {
+        String[] outputFormat = {" кв - "," подъезд, "," этаж, слева от лифта, влево",
+                                " этаж, слева от лифта, вправо"," этаж, справа от лифта, влево",
+                                " этаж, справа от лифта, вправо"};
+
             switch (flatNumber % 4) {
                 case 1:
-                    output = flatNumber + " кв - " + currentEntrance + " подъезд, "
-                            + currentFloor + " этаж, слева от лифта, влево";
+                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
+                            + currentFloor + outputFormat[2];
                     break;
                 case 2:
-                    output = flatNumber + " кв - " + currentEntrance + " подъезд, "
-                            + currentFloor + " этаж, слева от лифта, вправо";
+                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
+                            + currentFloor + outputFormat[3];
                     break;
                 case 3:
-                    output = flatNumber + " кв - " + currentEntrance + " подъезд, "
-                            + currentFloor + " этаж, справа от лифта, влево";
+                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
+                            + currentFloor + outputFormat[4];
                     break;
                 case 0:
-                    output = flatNumber + " кв - " + currentEntrance + " подъезд, "
-                            + currentFloor + " этаж, справа от лифта, вправо";
+                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
+                            + currentFloor + outputFormat[5];
                     break;
+                default: output = "Что-то пошло не так...";
 
             }
-        }
+
         return output;
     }
 }
