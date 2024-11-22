@@ -48,32 +48,25 @@ public class Task2 {
 
         int currentEntrance = ((flatNumber - 1) / (4 * floorAmount)) + 1;
         int currentFloor = ((flatNumber - 1) % (4 * floorAmount)) / 4 + 1;
+        String outputEnd = "";
 
-        String[] outputFormat = {" кв - "," подъезд, "," этаж, слева от лифта, влево",
-                                " этаж, слева от лифта, вправо"," этаж, справа от лифта, влево",
-                                " этаж, справа от лифта, вправо"};
-
-            switch (flatNumber % 4) {
-                case 1:
-                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
-                            + currentFloor + outputFormat[2];
-                    break;
-                case 2:
-                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
-                            + currentFloor + outputFormat[3];
-                    break;
-                case 3:
-                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
-                            + currentFloor + outputFormat[4];
-                    break;
-                case 0:
-                    output = flatNumber + outputFormat[0] + currentEntrance + outputFormat[1]
-                            + currentFloor + outputFormat[5];
-                    break;
-                default: output = "Что-то пошло не так...";
-
-            }
-
+        switch (flatNumber % 4) {
+            case 1:
+                outputEnd = " этаж, слева от лифта, влево";
+                break;
+            case 2:
+                outputEnd = " этаж, слева от лифта, вправо";
+                break;
+            case 3:
+                outputEnd = " этаж, справа от лифта, влево";
+                break;
+            case 0:
+                outputEnd = " этаж, справа от лифта, вправо";
+                break;
+            default:
+                output = "Что-то пошло не так...";
+        }
+        output = flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + outputEnd;
         return output;
     }
 }
