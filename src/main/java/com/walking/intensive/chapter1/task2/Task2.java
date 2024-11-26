@@ -37,7 +37,7 @@ public class Task2 {
     }
 
     static String getFlatLocation(int floorAmount, int entranceAmount, int flatNumber) {
-        String output = "";
+
 
         if (floorAmount <= 0 || entranceAmount <= 0 || flatNumber <= 0) {
             return "Некорректные входные данные";
@@ -64,9 +64,9 @@ public class Task2 {
                 outputEnd = " этаж, справа от лифта, вправо";
                 break;
             default:
-                output = "Что-то пошло не так...";
+                return "Что-то пошло не так...";
         }
-        output = flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + outputEnd;
-        return output;
+        return flatNumber + " кв - " + currentEntrance + " подъезд, " + currentFloor + outputEnd;
+
     }
 }
