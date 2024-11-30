@@ -1,6 +1,5 @@
 package com.walking.intensive.chapter1.task5;
 
-import static java.lang.Math.max;
 import static java.lang.Math.sqrt;
 
 /**
