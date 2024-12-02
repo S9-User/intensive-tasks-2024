@@ -30,16 +30,17 @@ public class Task5 {
 
     static boolean isValid(double a, double b, double c) {
         return a > 0 & b > 0 & c > 0 &
-               a + b > c & a + c > b & b + c > a;
+                a + b > c & a + c > b & b + c > a;
     }
 
     static double getAreaByHeron(double a, double b, double c) {
         double p = getPerymeter(a, b, c);
 
-        if (isValid(a, b, c)) {
-            return sqrt(p * (p - a) * (p - b) * (p - c));
+        if (!isValid(a, b, c)) {
+            return -1;
         }
-        return -1;
+
+        return sqrt(p * (p - a) * (p - b) * (p - c));
     }
 
     /**
@@ -51,27 +52,27 @@ public class Task5 {
      */
     static double[] getHeights(double a, double b, double c) {
 
-        if (isValid(a, b, c)) {
-
-            double S = getAreaByHeron(a, b, c);
-            double ha = (2 * S) / a;
-            double hb = (2 * S) / b;
-            double hc = (2 * S) / c;
-            double[] Heights = new double[3];
-            Heights[0] = Math.min(Math.min(ha, hb), hc);
-            Heights[2] = Math.max(Math.max(ha, hb), hc);
-            if (ha > Heights[0] && ha < Heights[2]) {
-                Heights[1] = ha;
-            } else {
-                if (hb > Heights[0] && hb < Heights[2]) {
-                    Heights[1] = hb;
-                } else {
-                    Heights[1] = hc;
-                }
-            }
-            return Heights;
+        if (!isValid(a, b, c)) {
+            return new double[0];
         }
-        return new double[0]; // Заглушка. При реализации - удалить
+
+        double S = getAreaByHeron(a, b, c);
+        double ha = (2 * S) / a;
+        double hb = (2 * S) / b;
+        double hc = (2 * S) / c;
+        double[] Heights = new double[3];
+        Heights[0] = Math.min(Math.min(ha, hb), hc);
+        Heights[2] = Math.max(Math.max(ha, hb), hc);
+        if (ha > Heights[0] && ha < Heights[2]) {
+            Heights[1] = ha;
+        } else {
+            if (hb > Heights[0] && hb < Heights[2]) {
+                Heights[1] = hb;
+            } else {
+                Heights[1] = hc;
+            }
+        }
+        return Heights;
     }
 
     /**
@@ -82,25 +83,26 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getMedians(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            double m_a = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
-            double m_b = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
-            double m_c = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
-            double[] Medians = new double[3];
-            Medians[0] = Math.min(Math.min(m_a, m_b), m_c);
-            Medians[2] = Math.max(Math.max(m_a, m_b), m_c);
-            if (m_a > Medians[0] && m_a < Medians[2]) {
-                Medians[1] = m_a;
-            } else {
-                if (m_b > Medians[0] && m_b < Medians[2]) {
-                    Medians[1] = m_b;
-                } else {
-                    Medians[1] = m_c;
-                }
-            }
-            return Medians;
+        if (!isValid(a, b, c)) {
+            return new double[0];
         }
-        return new double[0]; // Заглушка. При реализации - удалить
+
+        double m_a = 0.5 * Math.sqrt(2 * b * b + 2 * c * c - a * a);
+        double m_b = 0.5 * Math.sqrt(2 * a * a + 2 * c * c - b * b);
+        double m_c = 0.5 * Math.sqrt(2 * a * a + 2 * b * b - c * c);
+        double[] Medians = new double[3];
+        Medians[0] = Math.min(Math.min(m_a, m_b), m_c);
+        Medians[2] = Math.max(Math.max(m_a, m_b), m_c);
+        if (m_a > Medians[0] && m_a < Medians[2]) {
+            Medians[1] = m_a;
+        } else {
+            if (m_b > Medians[0] && m_b < Medians[2]) {
+                Medians[1] = m_b;
+            } else {
+                Medians[1] = m_c;
+            }
+        }
+        return Medians;
     }
 
     /**
@@ -111,25 +113,26 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getBisectors(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            double bisA = Math.sqrt(b * c * (1 - Math.pow(a, 2) / Math.pow(b + c, 2)));
-            double bisB = Math.sqrt(a * c * (1 - Math.pow(b, 2) / Math.pow(a + c, 2)));
-            double bisC = Math.sqrt(a * b * (1 - Math.pow(c, 2) / Math.pow(a + b, 2)));
-            double[] Bisectors = new double[3];
-            Bisectors[0] = Math.min(Math.min(bisA, bisB), bisC);
-            Bisectors[2] = Math.max(Math.max(bisA, bisB), bisC);
-            if (bisA > Bisectors[0] && bisA < Bisectors[2]) {
-                Bisectors[1] = bisA;
-            } else {
-                if (bisB > Bisectors[0] && bisB < Bisectors[2]) {
-                    Bisectors[1] = bisB;
-                } else {
-                    Bisectors[1] = bisC;
-                }
-            }
-            return Bisectors;
+        if (!isValid(a, b, c)) {
+            return new double[0];
         }
-        return new double[0]; // Заглушка. При реализации - удалить
+
+        double bisA = Math.sqrt(b * c * (1 - Math.pow(a, 2) / Math.pow(b + c, 2)));
+        double bisB = Math.sqrt(a * c * (1 - Math.pow(b, 2) / Math.pow(a + c, 2)));
+        double bisC = Math.sqrt(a * b * (1 - Math.pow(c, 2) / Math.pow(a + b, 2)));
+        double[] Bisectors = new double[3];
+        Bisectors[0] = Math.min(Math.min(bisA, bisB), bisC);
+        Bisectors[2] = Math.max(Math.max(bisA, bisB), bisC);
+        if (bisA > Bisectors[0] && bisA < Bisectors[2]) {
+            Bisectors[1] = bisA;
+        } else {
+            if (bisB > Bisectors[0] && bisB < Bisectors[2]) {
+                Bisectors[1] = bisB;
+            } else {
+                Bisectors[1] = bisC;
+            }
+        }
+        return Bisectors;
     }
 
     /**
@@ -140,30 +143,31 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать пустой массив нулевой длины.
      */
     static double[] getAngles(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            double cosA = (b * b + c * c - a * a) / (2 * b * c);
-            double cosB = (a * a + c * c - b * b) / (2 * a * c);
-            double cosC = (a * a + b * b - c * c) / (2 * a * b);
-
-            double angleA = Math.toDegrees(Math.acos(cosA));
-            double angleB = Math.toDegrees(Math.acos(cosB));
-            double angleC = Math.toDegrees(Math.acos(cosC));
-
-            double[] Angles = new double[3];
-            Angles[0] = Math.min(Math.min(angleA, angleB), angleC);
-            Angles[2] = Math.max(Math.max(angleA, angleB), angleC);
-            if (angleA > Angles[0] && angleA < Angles[2]) {
-                Angles[1] = angleA;
-            } else {
-                if (angleB > Angles[0] && angleB < Angles[2]) {
-                    Angles[1] = angleB;
-                } else {
-                    Angles[1] = angleC;
-                }
-            }
-            return Angles;
+        if (!isValid(a, b, c)) {
+            return new double[0];
         }
-        return new double[0]; // Заглушка. При реализации - удалить
+
+        double cosA = (b * b + c * c - a * a) / (2 * b * c);
+        double cosB = (a * a + c * c - b * b) / (2 * a * c);
+        double cosC = (a * a + b * b - c * c) / (2 * a * b);
+
+        double angleA = Math.toDegrees(Math.acos(cosA));
+        double angleB = Math.toDegrees(Math.acos(cosB));
+        double angleC = Math.toDegrees(Math.acos(cosC));
+
+        double[] Angles = new double[3];
+        Angles[0] = Math.min(Math.min(angleA, angleB), angleC);
+        Angles[2] = Math.max(Math.max(angleA, angleB), angleC);
+        if (angleA > Angles[0] && angleA < Angles[2]) {
+            Angles[1] = angleA;
+        } else {
+            if (angleB > Angles[0] && angleB < Angles[2]) {
+                Angles[1] = angleB;
+            } else {
+                Angles[1] = angleC;
+            }
+        }
+        return Angles;
     }
 
     /**
@@ -174,11 +178,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getInscribedCircleRadius(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            double p = getPerymeter(a, b, c);
-            return getAreaByHeron(a, b, c) / p;
-        }
-        return -1; // Заглушка. При реализации - удалить
+        if (!isValid(a, b, c)) {
+            return -1;
+            }
+
+        double p = getPerymeter(a, b, c);
+        return getAreaByHeron(a, b, c) / p;
     }
 
     /**
@@ -189,10 +194,11 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getCircumradius(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            return (a * b * c) / (4 * getAreaByHeron(a, b, c));
+        if (!isValid(a, b, c)) {
+            return -1;
         }
-        return -1; // Заглушка. При реализации - удалить
+
+        return (a * b * c) / (4 * getAreaByHeron(a, b, c));
     }
 
     /**
@@ -210,13 +216,12 @@ public class Task5 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static double getAreaAdvanced(double a, double b, double c) {
-        if (isValid(a, b, c)) {
-            double cosC = (a * a + b * b - c * c) / (2 * a * b);
-
-            double sinC = Math.sqrt(1 - cosC * cosC);
-
-            return 0.5 * a * b * sinC;
+        if (!isValid(a, b, c)) {
+            return -1;
         }
-        return -1; // Заглушка. При реализации - удалить
+
+        double cosC = (a * a + b * b - c * c) / (2 * a * b);
+        double sinC = Math.sqrt(1 - cosC * cosC);
+        return 0.5 * a * b * sinC;
     }
 }
