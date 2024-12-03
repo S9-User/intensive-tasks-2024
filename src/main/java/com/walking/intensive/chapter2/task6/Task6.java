@@ -19,8 +19,10 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getLcm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+        return Math.abs(m * n) / getGcd(m, n);
     }
 
     /**
@@ -31,8 +33,15 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcd(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n <= 0) {
+            return -1;
+        }
+        while (n != 0) {
+            int temp = n;
+            n = m % n;
+            m = temp;
+        }
+        return Math.abs(m);
     }
 
     /**
@@ -44,7 +53,12 @@ public class Task6 {
      * <p>Если входные данные некорректны - метод должен возвращать -1.
      */
     static int getGcdByEuclideanAlgorithm(int m, int n) {
-        // Ваш код
-        return 0;
+        if (m <= 0 || n < 0) {
+            return -1;
+        }
+        if (n == 0) {
+            return Math.abs(m);
+        }
+        return getGcdByEuclideanAlgorithm(n, m % n);
     }
 }
