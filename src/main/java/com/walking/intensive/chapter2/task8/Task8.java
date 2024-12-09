@@ -25,23 +25,28 @@ public class Task8 {
 
     static double getHappyTicketChance() {
         int[] countOfSums = new int[28];
+        // В методе мы перебираем все возможные суммы трёх первых и трёх последних цифр билета.
+        // Нетрудно догадаться, что максимальная сумма трёх цифр будет 27, т.к. 9+9+9 = 27.
+        // Также к 27 вариантам добавляется 0, хоть и такой билет у нас всего один.
+        // Получается, что всего возможных сумм у нас 28, такой размер массива мы и выбираем.
 
-        for (int i = 0; i <= 9; i++) {
-            for (int j = 0; j <= 9; j++) {
+        for (int i = 0; i <= 9; i++) {      // этими тремя строками мы перебираем все варианты трёх чисел
+            for (int j = 0; j <= 9; j++) {     // от нуля до девятки
                 for (int k = 0; k <= 9; k++) {
                     int sum = i + j + k;
-                    countOfSums[sum]++;
-                }
+                    countOfSums[sum]++; // и добавляем соответствующему элементу массива 1, если сумма совпадает
+                }                       // с индексом массива
             }
         }
         long happyTicketCount = 0;
         for (int sum = 0; sum <= 27; sum++) {
             happyTicketCount += (long) countOfSums[sum] * countOfSums[sum];
-        }
+            //Для каждой суммы от 0 до 27 количество комбинаций для первой половины
+        } // билета умножается на количество комбинаций для второй половины (так как они должны быть равны).
 
-        final long totalTickets = 1_000_000L;
+        final long totalTickets = 1_000_000L; // дано по условию
 
-        return (double) happyTicketCount / totalTickets;
+        return (double) happyTicketCount / totalTickets; //непосредственно вычисление вероятности
 
     }
 }
