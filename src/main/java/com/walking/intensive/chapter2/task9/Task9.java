@@ -50,12 +50,57 @@ package com.walking.intensive.chapter2.task9;
  * <p><a href="https://github.com/KFalcon2022/intensive-tasks-2024/blob/master/README.md">Требования к оформлению</a>
  */
 public class Task9 {
+
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(getPascalTriangle(18));
     }
 
     static String getPascalTriangle(int n) {
-        // Ваш код
-        return null;
+        if (n <= 0) {
+            return "";
+        }
+
+        int[][] triangle = new int[n][];
+
+        // Заполняем треугольник Паскаля
+        for (int i = 0; i < n; i++) {
+            triangle[i] = new int[i + 1];
+            triangle[i][0] = 1;
+            triangle[i][i] = 1;
+
+            for (int j = 1; j < i; j++) {
+                triangle[i][j] = triangle[i - 1][j - 1] + triangle[i - 1][j];
+            }
+        }
+
+        // Находим длину последней строки
+        StringBuilder lastRow = new StringBuilder();
+        for (int num : triangle[n - 1]) {
+            lastRow.append(num).append(" ");
+        }
+        int maxLen = lastRow.length() - 1; // вычитаем пробел в конце
+
+        // Создаем StringBuilder для результата
+        StringBuilder result = new StringBuilder();
+
+        // Выводим треугольник, центрируя каждую строку
+        for (int i = 0; i < n; i++) {
+            StringBuilder row = new StringBuilder();
+            for (int num : triangle[i]) {
+                row.append(num).append(" ");
+            }
+            int padding = (maxLen - row.length() + 1) / 2;
+
+            // Добавляем пробелы для центрирования
+            StringBuilder paddedRow = new StringBuilder();
+            for (int j = 0; j < padding; j++) {
+                paddedRow.append(" ");
+            }
+            paddedRow.append(row.toString().trim());
+
+            result.append(paddedRow.toString()).append("\n");
+        }
+
+        return result.toString();
     }
 }
