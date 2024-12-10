@@ -98,7 +98,7 @@ public class Task9 {
             }
             paddedRow.append(row.toString().trim());
 
-            result.append(paddedRow.toString()).append("\n");
+            result.append(paddedRow).append("\n");
         }
 
         return result.toString();
