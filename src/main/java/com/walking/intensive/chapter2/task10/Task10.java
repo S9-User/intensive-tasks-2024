@@ -20,7 +20,15 @@ public class Task10 {
             return false;
         }
 
-        String cleanedStr = inputString.replaceAll("[^а-яА-Я]", "").toLowerCase();
+        StringBuilder cleanedStrBuilder = new StringBuilder();
+
+        for (char c : inputString.toCharArray()) {
+            if (Character.isLetter(c)) {
+                cleanedStrBuilder.append(Character.toLowerCase(c));
+            }
+        }
+
+        String cleanedStr = cleanedStrBuilder.toString();
 
         int left = 0;
         int right = cleanedStr.length() - 1;
@@ -32,6 +40,7 @@ public class Task10 {
             left++;
             right--;
         }
+        
         return true;
     }
 }
