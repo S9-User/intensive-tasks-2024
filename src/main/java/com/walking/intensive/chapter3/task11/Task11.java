@@ -46,7 +46,39 @@ public class Task11 {
     }
 
     static int getOddSubArraysElementsSum(int[] array) {
-        // Ваш код
-        return 0;
+
+        // Проверка на пустой массив
+        if (array == null || array.length == 0) {
+            return 0;
+        }
+
+        // Проверка на корректность данных (все элементы должны быть положительными)
+        for (int num : array) {
+            if (num <= 0) {
+                return -1;
+            }
+        }
+
+        int totalSum = 0;
+        int n = array.length;
+
+        // Проходим по всем возможным начальным точкам подмассива
+        for (int start = 0; start < n; start++) {
+            int currentSum = 0;
+
+            // Проходим по всем возможным конечным точкам подмассива
+            for (int end = start; end < n; end++) {
+                currentSum += array[end];
+
+                // Проверяем, является ли длина текущего подмассива нечетной
+                int length = end - start + 1;
+                if (length % 2 != 0) {
+                    totalSum += currentSum;
+                }
+            }
+        }
+
+        return totalSum;
     }
+
 }
