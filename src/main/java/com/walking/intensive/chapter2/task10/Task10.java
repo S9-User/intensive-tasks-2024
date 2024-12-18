@@ -11,7 +11,7 @@ package com.walking.intensive.chapter2.task10;
  */
 public class Task10 {
     public static void main(String[] args) {
-//        Для собственных проверок можете делать любые изменения в этом методе
+        System.out.println(isPalindrome("А роза упала на лапу Азора"));
     }
 
     static boolean isPalindrome(String inputString) {
@@ -19,28 +19,27 @@ public class Task10 {
         if (inputString == null || inputString.length() < 2) {
             return false;
         }
-
-        StringBuilder cleanedStrBuilder = new StringBuilder();
-
-        for (char c : inputString.toCharArray()) {
-            if (Character.isLetter(c)) {
-                cleanedStrBuilder.append(Character.toLowerCase(c));
-            }
-        }
-
-        String cleanedStr = cleanedStrBuilder.toString();
-
         int left = 0;
-        int right = cleanedStr.length() - 1;
+        int right = inputString.length() - 1;
 
         while (left < right) {
-            if (cleanedStr.charAt(left) != cleanedStr.charAt(right)) {
+            // Пропускаем небуквенные символы слева
+            while (left < right && !Character.isLetter(inputString.charAt(left))) {
+                left++;
+            }
+            // Пропускаем небуквенные символы справа
+            while (left < right && !Character.isLetter(inputString.charAt(right))) {
+                right--;
+            }
+
+            // Сравниваем буквы, приведённые к нижнему регистру
+            if (Character.toLowerCase(inputString.charAt(left)) != Character.toLowerCase(inputString.charAt(right))) {
                 return false;
             }
             left++;
             right--;
         }
-        
+
         return true;
     }
 }
